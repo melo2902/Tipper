@@ -13,13 +13,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tipPercentageControl;
 @property (weak, nonatomic) IBOutlet UIView *labelsContainerView;
-@property (weak, nonatomic) IBOutlet UILabel *splitAmt;
-@property (weak, nonatomic) IBOutlet UITextField *split;
+@property (weak, nonatomic) IBOutlet UITextField *splitNumber;
+@property (weak, nonatomic) IBOutlet UILabel *splitAmtLabel;
 
 @end
 
 @implementation TipViewController
 bool isHidden = false;
+//double defaultTip = [defaults doubleForKey:@"defaultTip"];
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,21 +38,23 @@ bool isHidden = false;
         [self showLabels];
     }
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    double savedDefault = [defaults doubleForKey:@"defaultTip"];
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    double savedDefault = [defaults doubleForKey:@"defaultTip"];
     
-    double tipPercentages[] = {0.15, 0.2, 0.25, savedDefault};
+    double tipPercentages[] = {0.15, 0.2, 0.25};
     double tipPercentage = tipPercentages[self.tipPercentageControl.selectedSegmentIndex];
     
     // Convert from string to numbers
     double bill = [self.billAmountField.text doubleValue];
+    int splitNumber = [self.splitNumber.text intValue];
+    
     double tip = bill * tipPercentage;
     double total = bill + tip;
-    double split = total / [self.split.text intValue];
+    double split = total / splitNumber;
     
     self.tipLabel.text = [NSString stringWithFormat:@"$%.2f", tip];
     self.totalLabel.text = [NSString stringWithFormat:@"$%.2f", total];
-    self.splitAmt.text = [NSString stringWithFormat:@"$%.2f", split];
+    self.splitAmtLabel.text = [NSString stringWithFormat:@"$%.2f", split];
 }
 
 - (void)hideLabels {
@@ -72,23 +75,6 @@ bool isHidden = false;
         self.labelsContainerView.alpha = 0;
        
     }];
-}
-
-- (IBAction)animateUp:(id)sender {
-    if (isHidden == false){
-        CGRect billFrame = self.billAmountField.frame;
-        
-        billFrame.origin.y -= 200;
-        
-        self.billAmountField.frame = billFrame;
-        
-        CGRect labelsFrame = self.labelsContainerView.frame;
-        labelsFrame.origin.y -= 200;
-        
-        self.labelsContainerView.frame = labelsFrame;
-        
-        isHidden = true;
-    }
 }
 
 - (void)showLabels {
@@ -112,13 +98,13 @@ bool isHidden = false;
     }];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    double savedDefault = [defaults doubleForKey:@"defaultTip"];
-    
-}
+//- (void)viewWillAppear:(BOOL)animated {
+//    [super viewWillAppear:animated];
+//
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    double savedDefault = [defaults doubleForKey:@"defaultTip"];
+//
+//}
 
 /*
 #pragma mark - Navigation

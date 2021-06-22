@@ -50,7 +50,6 @@
                                             <segment title="15%"/>
                                             <segment title="20%"/>
                                             <segment title="25%"/>
-                                            <segment title="Default"/>
                                         </segments>
                                         <connections>
                                             <action selector="updateLabels:" destination="4Lz-ca-NfV" eventType="valueChanged" id="jnC-55-QiD"/>
@@ -77,25 +76,28 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Luv-O4-TuG">
-                                        <rect key="frame" x="106" y="267" width="233" height="48"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="person.and.person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Vyq-pm-2RV">
                                         <rect key="frame" x="49" y="272" width="49" height="39"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <color key="tintColor" systemColor="labelColor"/>
                                     </imageView>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0CC-2n-Ndj">
+                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="csR-2W-LGw">
                                         <rect key="frame" x="8" y="274" width="35" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <connections>
+                                            <action selector="updateLabels:" destination="4Lz-ca-NfV" eventType="valueChanged" id="gtv-b8-r6Y"/>
+                                        </connections>
                                     </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IqR-Wr-UaI">
+                                        <rect key="frame" x="106" y="264" width="233" height="48"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="40"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
@@ -126,8 +128,8 @@
                     <connections>
                         <outlet property="billAmountField" destination="gZZ-Un-EAU" id="QyO-4R-pya"/>
                         <outlet property="labelsContainerView" destination="Ihh-oG-KaY" id="yCf-ix-pvn"/>
-                        <outlet property="split" destination="0CC-2n-Ndj" id="h7h-w6-d04"/>
-                        <outlet property="splitAmt" destination="Luv-O4-TuG" id="s8g-xC-ltz"/>
+                        <outlet property="splitAmtLabel" destination="IqR-Wr-UaI" id="gVc-Tp-Hzl"/>
+                        <outlet property="splitNumber" destination="csR-2W-LGw" id="2jk-fr-0sT"/>
                         <outlet property="tipLabel" destination="Q8u-r8-Ecu" id="tlm-VU-mPb"/>
                         <outlet property="tipPercentageControl" destination="Xkz-U3-eeh" id="kHN-Ea-AeZ"/>
                         <outlet property="totalLabel" destination="xsc-4s-ic1" id="bTz-XI-dvF"/>
@@ -166,6 +168,13 @@
                                     <action selector="onDefaultTipChange:" destination="94j-rB-pBK" eventType="valueChanged" id="XC3-vr-o5s"/>
                                 </connections>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="*Coming Soon*" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fEF-xs-p26">
+                                <rect key="frame" x="146" y="164" width="98" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wA9-Tx-tg9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
