@@ -19,7 +19,7 @@
 @end
 
 @implementation TipViewController
-//bool isHidden = false;
+bool isHidden = false;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -56,6 +56,8 @@
 
 - (void)hideLabels {
     [UIView animateWithDuration:0.5 animations:^{
+        isHidden = true;
+        
         CGRect billFrame = self.billAmountField.frame;
         
         billFrame.origin.y += 200;
@@ -73,9 +75,7 @@
 }
 
 - (IBAction)animateUp:(id)sender {
-    CGRect billFrame = self.billAmountField.frame;
-    
-    if (billFrame.origin.y > 0){
+    if (isHidden == false){
         CGRect billFrame = self.billAmountField.frame;
         
         billFrame.origin.y -= 200;
@@ -86,6 +86,8 @@
         labelsFrame.origin.y -= 200;
         
         self.labelsContainerView.frame = labelsFrame;
+        
+        isHidden = true;
     }
 }
 
@@ -93,9 +95,20 @@
     [UIView animateWithDuration:0.5 animations:^{
         self.labelsContainerView.alpha = 1;
         
-//        CGRect billFrame = self.billAmountField.frame;
-//
-//        billFrame.origin.y = 0;
+        if (isHidden == true){
+            CGRect billFrame = self.billAmountField.frame;
+            
+            billFrame.origin.y -= 200;
+            
+            self.billAmountField.frame = billFrame;
+            
+            CGRect labelsFrame = self.labelsContainerView.frame;
+            labelsFrame.origin.y -= 200;
+            
+            self.labelsContainerView.frame = labelsFrame;
+            
+            isHidden = false;
+        }
     }];
 }
 
