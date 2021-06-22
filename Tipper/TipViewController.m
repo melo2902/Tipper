@@ -13,10 +13,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalLabel;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tipPercentageControl;
 @property (weak, nonatomic) IBOutlet UIView *labelsContainerView;
+@property (weak, nonatomic) IBOutlet UILabel *splitAmt;
+@property (weak, nonatomic) IBOutlet UITextField *split;
 
 @end
 
 @implementation TipViewController
+//bool isHidden = false;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,16 +27,7 @@
 }
 - (IBAction)onTap:(id)sender {
     [self.view endEditing:true];
-    
-//    if (self.billAmountField.text.length == 0){
-//        CGRect billFrame = self.billAmountField.frame;
-//        billFrame.origin.y -= 200;
-//
-//        self.billAmountField.frame = billFrame;
-//
-//        CGRect labelsFrame = self.labelsContainerView.frame;
-//        labelsFrame.origin.y -= 200;
-//    }
+   
 }
 
 - (IBAction)updateLabels:(id)sender {
@@ -53,9 +47,11 @@
     double bill = [self.billAmountField.text doubleValue];
     double tip = bill * tipPercentage;
     double total = bill + tip;
+    double split = total / [self.split.text intValue];
     
     self.tipLabel.text = [NSString stringWithFormat:@"$%.2f", tip];
     self.totalLabel.text = [NSString stringWithFormat:@"$%.2f", total];
+    self.splitAmt.text = [NSString stringWithFormat:@"$%.2f", split];
 }
 
 - (void)hideLabels {
@@ -76,9 +72,30 @@
     }];
 }
 
+- (IBAction)animateUp:(id)sender {
+    CGRect billFrame = self.billAmountField.frame;
+    
+    if (billFrame.origin.y > 0){
+        CGRect billFrame = self.billAmountField.frame;
+        
+        billFrame.origin.y -= 200;
+        
+        self.billAmountField.frame = billFrame;
+        
+        CGRect labelsFrame = self.labelsContainerView.frame;
+        labelsFrame.origin.y -= 200;
+        
+        self.labelsContainerView.frame = labelsFrame;
+    }
+}
+
 - (void)showLabels {
     [UIView animateWithDuration:0.5 animations:^{
         self.labelsContainerView.alpha = 1;
+        
+//        CGRect billFrame = self.billAmountField.frame;
+//
+//        billFrame.origin.y = 0;
     }];
 }
 
