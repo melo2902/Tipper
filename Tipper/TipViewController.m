@@ -43,7 +43,10 @@
         [self showLabels];
     }
     
-    double tipPercentages[] = {0.15, 0.2, 0.25};
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    double savedDefault = [defaults doubleForKey:@"defaultTip"];
+    
+    double tipPercentages[] = {0.15, 0.2, 0.25, savedDefault};
     double tipPercentage = tipPercentages[self.tipPercentageControl.selectedSegmentIndex];
     
     // Convert from string to numbers
@@ -77,6 +80,14 @@
     [UIView animateWithDuration:0.5 animations:^{
         self.labelsContainerView.alpha = 1;
     }];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    double savedDefault = [defaults doubleForKey:@"defaultTip"];
+    
 }
 
 /*
